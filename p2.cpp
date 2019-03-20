@@ -41,15 +41,18 @@ int main() {
 
     thread threadA(numbers,ref(myFile));
     thread threadB(letters,ref(myFile));
-    myFile << "Thread A (ID " << threadA.get_id() << ") created!" << endl;
-    myFile << "Thread B (ID " << threadB.get_id() << ") created!" << endl;
+    thread::id threadA_ID = threadA.get_id();
+    thread::id threadB_ID = threadB.get_id();
+
+    myFile << "Thread A (ID " << threadA_ID << ") created!" << endl;
+    myFile << "Thread B (ID " << threadB_ID << ") created!" << endl;
 
     mtx.unlock();
     threadA.join();
     threadB.join();
 
-    myFile << "Thread A (ID " << threadA.get_id() << ") terminated!" << endl;
-    myFile << "Thread B (ID " << threadB.get_id() << ") terminated!" << endl;
+    myFile << "Thread A (ID " << threadA_ID << ") terminated!" << endl;
+    myFile << "Thread B (ID " << threadB_ID << ") terminated!" << endl;
     myFile << "Nic's Project 2 ended" << endl;
     return 0;
 }
